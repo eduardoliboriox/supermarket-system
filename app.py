@@ -1,36 +1,31 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 
-DB_PATH = "database.db"
-
 app = Flask(__name__)
 
 def get_db():
-    first_time = not os.path.exists(DB_PATH)
-
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect("database.db")
     conn.row_factory = sqlite3.Row
 
-    if first_time:
-        conn.executescript("""
-        CREATE TABLE produtos (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT UNIQUE NOT NULL,
-            setor TEXT NOT NULL,
-            ultimo_preco REAL DEFAULT 0
-        );
+    conn.executescript("""
+    CREATE TABLE IF NOT EXISTS produtos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT UNIQUE NOT NULL,
+        setor TEXT NOT NULL,
+        ultimo_preco REAL DEFAULT 0
+    );
 
-        CREATE TABLE compras (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            produto_id INTEGER,
-            quantidade REAL DEFAULT 1,
-            preco REAL DEFAULT 0,
-            comprado INTEGER DEFAULT 0,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-        );
-        """)
-        conn.commit()
+    CREATE TABLE IF NOT EXISTS compras (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        produto_id INTEGER,
+        quantidade REAL DEFAULT 1,
+        preco REAL DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (produto_id) REFERENCES produtos(id)
+    );
+    """)
 
+    conn.commit()
     return conn
 
 
