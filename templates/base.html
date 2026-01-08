@@ -15,7 +15,7 @@
         <div class="avatar-circle">
             <img src="{{ url_for('static', filename='users/eduardo.jpeg') }}">
         </div>
-        <span class="user-name">Compras</span>
+        <span class="user-name">Supermercado</span>
     </div>
 
     <div class="header-mobile-right">
@@ -39,15 +39,16 @@
         <small>Produtos</small>
     </a>
 
-    <a href="/carrinho" class="bottom-item {% if page=='carrinho' %}active{% endif %}">
+    <a class="bottom-item disabled" onclick="paginaEmBreve()">
         <img src="{{ url_for('static', filename='icons/movimentar.jpeg') }}" class="bottom-icon">
         <small>Carrinho</small>
     </a>
 
-    <a href="/menu" class="bottom-item {% if page=='menu' %}active{% endif %}">
+    <a class="bottom-item disabled" onclick="paginaEmBreve()">
         <img src="{{ url_for('static', filename='icons/menu-mais.png') }}" class="bottom-icon">
         <small>Mais</small>
     </a>
+
 </nav>
 
 </body>
