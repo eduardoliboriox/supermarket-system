@@ -1,298 +1,156 @@
+🛒 Lista de Compras Inteligente
+A Lista de Compras Inteligente é uma aplicação web desenvolvida para organizar compras domésticas de forma prática, visual e persistente, permitindo controlar quantidades, preços, totais, gasto previsto e saldo disponível em tempo real.
 
-# 🏷️ Venttos Electronics. Venttos Trace
+O sistema substitui listas em papel ou anotações improvisadas, oferecendo uma experiência fluida tanto no desktop quanto no mobile, com foco em simplicidade, organização e usabilidade.
 
-O **Venttos Trace** é uma plataforma interna desenvolvida para controlar, monitorar e registrar toda a movimentação de placas/peças dentro do fluxo produtivo. Ele utiliza **QR Codes**, etiquetas individuais por lote e pontos de rastreio (terminais) instalados nos setores para garantir que cada item seja rastreado desde a produção até a expedição.
+🎯 Objetivo do Projeto
+Centralizar todos os produtos da compra em um único local
 
-É um sistema **automatizado em tempo real**, que substitui controles manuais (planilhas, papéis, anotações), reduz falhas humanas e aumenta a confiabilidade da informação.
+Controlar valores automaticamente conforme as quantidades variam
 
-Visualize a aplicação real através do link no final deste README.md.
+Manter os dados salvos mesmo após atualizar a página
 
----
+Facilitar o cadastro rápido de novos produtos
 
-## 📁 Estrutura do Projeto
+Garantir uma experiência intuitiva e funcional
 
-```
-label-tracking-system-venttos/venttos-trace
+📁 Estrutura do Projeto
+lista-compras/
 ├─ static/
-│     ├─ icons/
-│     │     └─ config.jpeg, dashboard.jpeg, home-hero.png, home.jpeg, live.jpeg,
-│     │         logo-page-dashboard.png, logo-page-live.png, logo-page-ops.png,
-│     │         logo-page-ordens.png, menu.jpeg, movimentar.jpeg, ops.jpeg, ordens.jpeg  
-│     ├─ logos/
-│     │     └─ logo-name.jpeg, logo.jpeg, logo.png
-│     ├─ qrcodes/
-│     │     └─ da.png
-│     ├─ users/
-│     │     └─ eduardo.jpeg
-│     └─ style.css      
-│   
+│   ├─ style.css
+│   └─ icons/
+│
 ├─ templates/
-│     ├─ base.html
-│     ├─ dashboard.html    
-│     ├─ etiqueta_view.html
-│     ├─ form.html
-│     ├─ history.html
-│     ├─ home.html
-│     ├─ index.html
-│     ├─ label.html
-│     ├─ live.html
-│     ├─ live_consultar.html
-│     ├─ menu.html
-│     ├─ movimentar.html
-│     ├─ ops.html
-│     └─ setores.html
+│   ├─ base.html
+│   ├─ produtos.html
+│   └─ lista_compras.html
 │
 ├─ app.py
 ├─ models.db
-├─ ping.py
-├─ Profile
-├─ README.EN.md
-├─ README.md
-└─ requirements.txt
-```
+├─ requirements.txt
+└─ README.md
+🚀 Funcionalidades
+Cadastro de produtos por categoria:
 
----
+Alimentos Principais
 
-## 🚀 Funcionalidades
+Complementos
 
-* Cadastro de modelos/produtos (cliente, linha, lote, OP, processo, CQ etc.)
-* Geração automática de **QR Codes**
-* Impressão de etiquetas individuais por lote
-* Controle de quantidade produzida e saldo disponível
-* Histórico completo de movimentações por setor
-* Controle de Ordens de Produção (OPs) em tempo real
-* Consulta detalhada de produção por OP
-* Indicadores por setor, turno, fase e horário
-* Dashboard dinâmico de produção
-* Interface HTML responsiva com **Bootstrap**
-* Experiência otimizada para desktop e mobile
+Temperos
 
----
+Higiene e Limpeza
 
+Ajuste de quantidade com botões + / −
 
-## 🧾 Controle de Ordens de Produção (OP)
+Edição rápida de preço direto na tela
 
-Além da rastreabilidade por etiquetas, o Venttos Trace possui um módulo completo de controle de OPs, permitindo acompanhar a produção em tempo real, diretamente do chão de fábrica ou do escritório.
+Cálculo automático de:
 
----
+Total atual da compra
 
-## 📌 Visão Geral de OPs (Produção em Tempo Real)
+Gasto previsto
 
-A tela de produção ao vivo apresenta:
-* Lista consolidada de OPs ativas
-* Modelo e cliente
-* Quantidade já produzida
-* Setor atual da produção
+Saldo disponível
 
-Filtros por:
-* Data inicial e final
-* Setor (PTH, SMT, IM, PA, Estoque)
-* Busca por modelo, cliente ou OP
+Persistência automática dos dados usando LocalStorage
 
-Tudo é atualizado dinamicamente conforme os registros são lançados no sistema.
+Botão para limpar todos os dados da compra
 
----
+Modal para cadastro rápido de produtos
 
-## 🔍 Consulta Detalhada de OP
+Interface moderna e organizada
 
-### Ao acessar uma OP específica, o sistema exibe uma visão detalhada da produção:
+Layout responsivo para desktop e mobile
 
-* Total produzido
-* Produção filtrada por fase
-* Consolidação automática dos dados
-* Produção Hora a Hora
-* Quantidade produzida por faixa de horário
-* Separação por turno
-* Visualização clara de ritmo produtivo
+🧮 Cálculo em Tempo Real
+O sistema recalcula automaticamente:
 
-### Registros Detalhados. Cada apontamento contém:
+Total de cada produto (preço × quantidade)
 
-* Data e hora
-* Turno
-* Fase (TOP / BOTTOM)
-* Setor
-* Quantidade produzida
-* Operador responsável
+Total geral da compra
 
-Além disso, é possível aplicar filtros dinâmicos por:
+Saldo disponível com base no gasto previsto informado
 
-* Turno (1º, 2º ou todos)
- Fase (TOP, BOTTOM ou todas)
+Qualquer alteração de preço, quantidade ou orçamento reflete instantaneamente nos valores exibidos.
 
----
+💾 Persistência de Dados
+A aplicação salva automaticamente no navegador:
 
-## 📱 Experiência Desktop e Mobile (UX Diferenciada)
+Quantidade dos produtos
 
-O Venttos Trace foi desenvolvido como um sistema web completo para uso em computadores, porém com um cuidado especial para a experiência mobile.
+Preços atualizados
 
+Gasto previsto
+
+Isso garante que os dados não sejam perdidos ao atualizar a página, permitindo continuar a compra de onde parou.
+
+🪟 Modal de Cadastro de Produto
+O cadastro de novos produtos é feito através de um modal simples, permitindo:
+
+Informar nome do produto
+
+Definir preço
+
+Selecionar a categoria
+
+Após salvar, o produto aparece automaticamente na lista correspondente.
+
+🎨 Interface e Experiência do Usuário (UX)
+Design limpo e focado no conteúdo
+
+Botões grandes e acessíveis
+
+Separação clara por categorias
+
+Destaque visual para valores importantes
+
+Botão de ação destrutiva (Limpar dados) com cor diferenciada
+
+Interações sem recarregar a página
+
+📱 Desktop e Mobile
 💻 Desktop
+Visual completo
 
-No acesso via computador:
-* Layout tradicional de sistema corporativo
-* Tabelas completas
-* Dashboards amplos
-* Ideal para supervisão, gestão e análise
+Organização clara das categorias
 
----
+Ideal para planejamento detalhado
 
-## 📲 Mobile (Experiência tipo Aplicativo)
+📲 Mobile
+Layout adaptado ao toque
 
-### Ao acessar pelo celular, o sistema:
-* Detecta o tamanho da tela
-* Ativa layouts específicos para mobile
-* Utiliza navegação simplificada
-* Botões grandes e acessíveis
-* Menus otimizados para toque
-* Filtros reorganizados para uso rápido
+Navegação simples
 
-Mesmo sem ser um aplicativo nativo, a experiência no celular se comporta como um app industrial, facilitando o uso direto no chão de fábrica, terminais ou dispositivos móveis.
+Experiência semelhante a aplicativo
 
----
+⚙️ Tecnologias Utilizadas
+Python (Flask)
 
-## 📊 Fluxo de Dados e Pontos de Controle
+HTML5
 
-| Ponto        | Setor   | Função                  |
-| ------------ | ------- | ----------------------- |
-| **Ponto-01** | PTH     | Produção e Recebimento  |
-| **Ponto-02** | SMT     | Produção e Recebimento  |
-| **Ponto-03** | SMT     | Inspeção de Qualidade   |
-| **Ponto-04** | IM/PA   | Produção e Recebimento  |
-| **Ponto-05** | IM/PA   | Inspeção de Qualidade   |
-| **Ponto-06** | IM/PA   | Inspeção de Qualidade   |
-| **Ponto-07** | Estoque | Expedição (saída final) |
+CSS3
 
----
+JavaScript (Vanilla)
 
-## ⚙️ Como o Sistema Funciona
+Jinja2
 
-### 1. Cadastro de Modelos
+LocalStorage
 
-Cada produto/modelo recebe um cadastro contendo:
-
-* Código, Nome, Cliente
-* Linha e setor inicial
-* Lote e produção prevista
-* PO/OP, processo e CQ
-* Revisora/Operadora
-* Data e horário
-
-Este cadastro gera o registro-mestre que será rastreado.
-
----
-
-### 2. Geração de Etiquetas e Lotes
-
-Após cadastrar o modelo:
-
-1. O sistema calcula o número de etiquetas necessárias com base em **produção total** e **capacidade por magazine/caixa**.
-2. Cada etiqueta recebe:
-
-   * Lote individual (Ex.: "08 / 504")
-   * QR Code próprio
-   * Relação com o modelo original
-3. Cada etiqueta possui:
-
-   * Quantidade original e restante
-   * Setor atual
-   * Fase (aguardando, disponível, expedido, etc.)
-   * Histórico de movimentações
-
----
-
-### 3. Rastreabilidade com QR Code
-
-Nos terminais, o colaborador escaneia o QR Code. O sistema identifica:
-
-* Modelo, lote, setor, terminal (Ponto-01, 02, …)
-* Ação (produção, recebimento, inspeção, expedição)
-
-Cada registro contém:
-
-* Data e hora
-* Quantidade
-* Setor de origem e destino
-* Usuário e equipamento
-
-Isso garante **trilha completa e detalhada** do processo.
-
----
-
-### 4. Regras de Produção e Movimentação
-
-O sistema impede erros como:
-
-* Registro duplicado de produção
-* Entrada repetida em um setor
-* Movimentação acima do disponível
-* Pular etapas do fluxo
-* Mistura de lotes incorretos
-* Confusão de modelos com fluxos diferentes (SMT-FIRST)
-
----
-
-### 5. Histórico Completo
-
-Para cada modelo, é possível visualizar:
-
-* Etiquetas criadas
-* Movimentações por setor
-* Baixas de produção
-* Saldo atual por fase
-* Histórico de edição
-* Registro cronológico completo com data/hora
-
----
-
-### 6. Dashboard e Indicadores
-
-O dashboard mostra:
-
-* Saldo por setor (PTH, SMT, IM, PA, Estoque)
-* Fase (Aguardando, Disponível, Expedido, etc.)
-* Quantidade disponível por lote
-* Identificação de gargalos
-* Situação atualizada em tempo real
-
----
-
-## ✅ Benefícios para a Empresa
-
-**Produtividade:**
-
-* Reduz erros manuais
-* Elimina retrabalhos
-* Aumenta eficiência no chão de fábrica
-
-**Segurança:**
-
-* Registro imutável de cada ação
-* Histórico completo para auditoria
-
----
-
-## 📁 Como Rodar
-
-```bash
+▶️ Como Rodar o Projeto
 pip install -r requirements.txt
 python app.py
-```
+Depois, acesse no navegador:
 
----
+http://127.0.0.1:5000
+📌 Observações
+O sistema não utiliza login
 
-## 🔗 Acesso ao Sistema (Deploy)
+Os dados da compra atual ficam salvos localmente no navegador
 
-O sistema está disponível online pelo Render:
-Uso contramedidas até na versão free para a página não fechar por inatividade, caso feche, aguarde 50 segundos.
+O cadastro de produtos é persistido no banco de dados
 
-➡️ **https://label-tracking-system-venttos.onrender.com**
+Projeto ideal para uso pessoal ou familiar
 
----
-
-## 👨‍💻 Autor
-
-* Desenvolvido por **Eduardo Libório**
-* 📧 [eduardosoleno@protonmail.com](mailto:eduardosoleno@protonmail.com)
-
----
-
-
+👨‍💻 Autor
+Desenvolvido por Eduardo Libório
+📧 eduardosoleno@protonmail.com
