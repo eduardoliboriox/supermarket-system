@@ -40,9 +40,9 @@ def home():
 
     return render_template(
         "home.html",
-        produtos=produtos
+        produtos=produtos,
+        page="home"
     )
-
 
 
 @app.route("/add", methods=["POST"])
@@ -198,9 +198,7 @@ def atualizar_produto():
     db.commit()
 
     return {"status": "ok"}
-
-
-    
+   
 def init_db():
     db = get_db()
     db.close()
