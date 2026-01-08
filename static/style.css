@@ -340,7 +340,7 @@ main {
 .page-header-mobile {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0px;
 }
 
 .page-header-mobile h2.page-title {
@@ -408,11 +408,11 @@ main {
 }
 
 .topo-fixo-compras {
-    position: sticky;
-    top: 50px; /* abaixo do header-mobile */
+    position: fixed;
+    top: 2px; /* abaixo do header-mobile */
     background: #fff;
     z-index: 1000;
-    padding-bottom: 8px;
+    padding-bottom: 2px;
 }
 
 /* ===============================
@@ -564,7 +564,7 @@ main {
 .topo-fixo-compras {
     position: sticky;
     top: 0px; /* altura do seu header */
-    z-index: 100;
+    z-index: 1000;
     background: #f8f9fa;
     padding-bottom: 0px;
     margin-bottom: 0px;
