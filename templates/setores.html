@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% set page = "setores" %}
+
+{% block content %}
+
+<h2 class="page-title">🏷️ Setores</h2>
+
+<div class="menu-grid">
+
+    <a class="menu-card">
+        <img src="{{ url_for('static', filename='icons/home.jpeg') }}" class="menu-icon">
+        <span>Hortifruti</span>
+    </a>
+
+    <a class="menu-card">
+        <img src="{{ url_for('static', filename='icons/home.jpeg') }}" class="menu-icon">
+        <span>Açougue</span>
+    </a>
+
+    <a class="menu-card">
+        <img src="{{ url_for('static', filename='icons/home.jpeg') }}" class="menu-icon">
+        <span>Limpeza</span>
+    </a>
+
+    <a class="menu-card">
+        <img src="{{ url_for('static', filename='icons/home.jpeg') }}" class="menu-icon">
+        <span>Bebidas</span>
+    </a>
+
+</div>
+
+{% endblock %}

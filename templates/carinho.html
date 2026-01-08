@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% set page = "carrinho" %}
+
+{% block content %}
+
+<h2 class="page-title">✅ Carrinho</h2>
+
+<div class="models-mobile">
+
+{% for item in itens %}
+<div class="models-card op-ok">
+    <div class="models-card-header">
+        <span>{{ item.item }}</span>
+        <span class="models-card-cliente">OK</span>
+    </div>
+</div>
+{% endfor %}
+
+</div>
+
+{% endblock %}

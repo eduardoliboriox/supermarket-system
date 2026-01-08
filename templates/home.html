@@ -1,0 +1,468 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="lista-compras">
+
+    <!-- BLOCO FIXO -->
+    <div class="topo-fixo-compras">
+        <h2 class="titulo">Lista de Compras</h2>
+
+        <div class="resumo-valores">
+            <div class="valor-card">
+                <span>Total Atual</span>
+                <strong id="total-atual">R$ 0,00</strong>
+            </div>
+
+            <div class="valor-card">
+                <span>Gasto Previsto</span>
+                <input type="number" id="gasto-previsto" placeholder="R$ 0,00">
+            </div>
+
+            <div class="valor-card destaque">
+                <span>Saldo Disponível</span>
+                <strong id="saldo-disponivel">R$ 0,00</strong>
+            </div>
+        </div>
+
+        <button class="btn-mini" onclick="abrirModalProduto()">
+            Cadastrar Produto
+        </button>
+
+        <button class="btn-mini btn-limpar" onclick="limparDados()">
+            Limpar dados
+        </button>
+
+    </div>
+    <!-- FIM BLOCO FIXO -->
+
+    <!-- ================= ALIMENTOS PRINCIPAIS ================= -->
+    <div class="categoria" data-categoria="Alimentos Principais">
+        <div class="categoria-header">
+            <h3>Alimentos Principais</h3>
+            <button class="btn-add-produto"
+                    onclick="abrirModalProduto('Alimentos Principais')">+</button>
+        </div>
+
+        {% for p in produtos %}
+            {% if p.setor == "Alimentos Principais" %}
+            <div class="produto-card" data-preco="{{ p.ultimo_preco }}">
+                <div class="linha">
+                    <span class="nome">{{ p.nome }}</span>
+                    <span class="preco-texto">
+                        R$ {{ "%.2f"|format(p.ultimo_preco) }}
+                    </span>
+                    <input type="number"
+                        class="preco-input"
+                        value="{{ p.ultimo_preco }}"
+                        step="0.01"
+                        style="display:none">
+                </div>
+
+                <div class="linha">
+                    <div class="qtd">
+                        <button class="btn-menos">-</button>
+                        <span class="qtd-valor">0</span>
+                        <button class="btn-mais">+</button>
+                    </div>
+                    <strong class="total-produto">
+                        R$ {{ "%.2f"|format(p.ultimo_preco) }}
+                    </strong>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+<!-- ================= COMPLEMENTOS ================= -->
+    <div class="categoria" data-categoria="Complementos">
+        <div class="categoria-header">
+            <h3>Complementos</h3>
+            <button class="btn-add-produto"
+                    onclick="abrirModalProduto('Complementos')">+</button>
+        </div>
+
+        {% for p in produtos %}
+            {% if p.setor == "Complementos" %}
+            <div class="produto-card" data-preco="{{ p.ultimo_preco }}">
+                <div class="linha">
+                    <span class="nome">{{ p.nome }}</span>
+                    <span class="preco-texto">
+                        R$ {{ "%.2f"|format(p.ultimo_preco) }}
+                    </span>
+                    <input type="number"
+                        class="preco-input"
+                        value="{{ p.ultimo_preco }}"
+                        step="0.01"
+                        style="display:none">
+                </div>
+
+                <div class="linha">
+                    <div class="qtd">
+                        <button class="btn-menos">-</button>
+                        <span class="qtd-valor">0</span>
+                        <button class="btn-mais">+</button>
+                    </div>
+                    <strong class="total-produto">
+                        R$ {{ "%.2f"|format(p.ultimo_preco) }}
+                    </strong>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+<!-- ================= TEMPEROS ================= -->
+    <div class="categoria" data-categoria="Temperos">
+        <div class="categoria-header">
+            <h3>Temperos</h3>
+            <button class="btn-add-produto"
+                    onclick="abrirModalProduto('Temperos')">+</button>
+        </div>
+
+        {% for p in produtos %}
+            {% if p.setor == "Temperos" %}
+            <div class="produto-card" data-preco="{{ p.ultimo_preco }}">
+                <div class="linha">
+                    <span class="nome">{{ p.nome }}</span>
+                    <span class="preco-texto">
+                        R$ {{ "%.2f"|format(p.ultimo_preco) }}
+                    </span>
+                    <input type="number"
+                        class="preco-input"
+                        value="{{ p.ultimo_preco }}"
+                        step="0.01"
+                        style="display:none">
+                </div>
+
+                <div class="linha">
+                    <div class="qtd">
+                        <button class="btn-menos">-</button>
+                        <span class="qtd-valor">0</span>
+                        <button class="btn-mais">+</button>
+                    </div>
+                    <strong class="total-produto">
+                        R$ {{ "%.2f"|format(p.ultimo_preco) }}
+                    </strong>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+<!-- ================= HIGIENE E LIMPEZA ================= -->
+    <div class="categoria" data-categoria="Higiene e Limpeza">
+        <div class="categoria-header">
+            <h3>Higiene e Limpeza</h3>
+            <button class="btn-add-produto"
+                    onclick="abrirModalProduto('Higiene e Limpeza')">+</button>
+        </div>
+
+        {% for p in produtos %}
+            {% if p.setor == "Higiene e Limpeza" %}
+            <div class="produto-card" data-preco="{{ p.ultimo_preco }}">
+                <div class="linha">
+                    <span class="nome">{{ p.nome }}</span>
+                    <span class="preco-texto">
+                        R$ {{ "%.2f"|format(p.ultimo_preco) }}
+                    </span>
+                    <input type="number"
+                        class="preco-input"
+                        value="{{ p.ultimo_preco }}"
+                        step="0.01"
+                        style="display:none">
+                </div>
+
+                <div class="linha">
+                    <div class="qtd">
+                        <button class="btn-menos">-</button>
+                        <span class="qtd-valor">0</span>
+                        <button class="btn-mais">+</button>
+                    </div>
+                    <strong class="total-produto">
+                        R$ {{ "%.2f"|format(p.ultimo_preco) }}
+                    </strong>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+</div>
+
+<!-- ================= MODAL CADASTRAR PRODUTO ================= -->
+<div class="modal" id="modalProduto">
+    <div class="modal-content">
+        <h3>Novo Produto</h3>
+
+        <form method="POST" action="/produto">
+
+            <input
+                type="text"
+                name="nome"
+                placeholder="Nome do produto"
+                required
+            >
+
+            <input
+                type="number"
+                name="preco"
+                step="0.01"
+                placeholder="Preço"
+                required
+            >
+
+            <select name="setor">
+                <option value="Alimentos Principais">Alimentos Principais</option>
+                <option value="Complementos">Complementos</option>
+                <option value="Temperos">Temperos</option>
+                <option value="Higiene e Limpeza">Higiene e Limpeza</option>
+            </select>
+
+            <div class="modal-actions">
+                <button
+                    type="button"
+                    class="btn-cancelar"
+                    onclick="fecharModalProduto()"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-salvar"
+                >
+                    Salvar
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<!-- ================= JS ================= -->
+
+<script>
+let categoriaAtual = null;
+
+function abrirModalProduto(categoria = null) {
+    categoriaAtual = categoria;
+    document.getElementById("modalProduto").style.display = "flex";
+}
+
+function fecharModalProduto() {
+    document.getElementById("modalProduto").style.display = "none";
+
+    document.getElementById("novo-nome").value = "";
+    document.getElementById("novo-preco").value = "";
+    document.getElementById("nova-categoria").selectedIndex = 0;
+}
+
+function salvarProduto() {
+    const nome = document.getElementById("novo-nome").value.trim();
+    const preco = parseFloat(document.getElementById("novo-preco").value);
+    const categoria =
+        categoriaAtual || document.getElementById("nova-categoria").value;
+
+    if (!nome || isNaN(preco) || preco <= 0) {
+        alert("Preencha nome e preço corretamente");
+        return;
+    }
+
+    const categoriaDiv = document.querySelector(
+        `.categoria[data-categoria="${categoria}"]`
+    );
+
+    if (!categoriaDiv) {
+        alert("Categoria não encontrada");
+        return;
+    }
+
+    const produto = document.createElement("div");
+    produto.className = "produto-card";
+    produto.dataset.preco = preco;
+
+    produto.innerHTML = `
+        <div class="linha">
+            <span class="nome">${nome}</span>
+            <span class="preco-texto">${formatar(preco)}</span>
+            <input type="number"
+                   class="preco-input"
+                   value="${preco}"
+                   step="0.01"
+                   style="display:none">
+        </div>
+
+        <div class="linha">
+            <div class="qtd">
+                <button class="btn-menos">-</button>
+                <span class="qtd-valor">0</span>
+                <button class="btn-mais">+</button>
+            </div>
+            <strong class="total-produto">${formatar(preco)}</strong>
+        </div>
+    `;
+
+    categoriaDiv.appendChild(produto);
+    ativarEventosProduto(produto);
+
+    fecharModalProduto();
+    calcularTotais();
+}
+</script>
+
+<script>
+function formatar(v) {
+    return "R$ " + v.toFixed(2).replace(".", ",");
+}
+
+function calcularTotais() {
+    let total = 0;
+
+    document.querySelectorAll(".produto-card").forEach(card => {
+        const preco = parseFloat(card.dataset.preco) || 0;
+        const qtd = parseInt(card.querySelector(".qtd-valor").innerText) || 0;
+        total += preco * qtd;
+    });
+
+    document.getElementById("total-atual").innerText = formatar(total);
+
+    const gastoPrevisto =
+        parseFloat(document.getElementById("gasto-previsto").value || 0);
+
+    document.getElementById("saldo-disponivel").innerText =
+        formatar(gastoPrevisto - total);
+}
+
+/* ===== CONTROLA UM PRODUTO ===== */
+function ativarEventosProduto(card) {
+    const precoTexto = card.querySelector(".preco-texto");
+    const precoInput = card.querySelector(".preco-input");
+    const qtdSpan = card.querySelector(".qtd-valor");
+    const totalProduto = card.querySelector(".total-produto");
+
+    precoTexto.onclick = () => {
+        precoTexto.style.display = "none";
+        precoInput.style.display = "inline-block";
+        precoInput.focus();
+    };
+
+    precoInput.onblur = () => {
+        const novoPreco = parseFloat(precoInput.value) || 0;
+        card.dataset.preco = novoPreco;
+
+        precoTexto.innerText = formatar(novoPreco);
+        precoTexto.style.display = "inline";
+        precoInput.style.display = "none";
+
+        atualizarProduto(card);
+    };
+
+    // +
+    card.querySelector(".btn-mais").onclick = () => {
+        qtdSpan.innerText = parseInt(qtdSpan.innerText) + 1;
+        atualizarProduto(card);
+    };
+
+    // – (PERMITE ZERO)
+    card.querySelector(".btn-menos").onclick = () => {
+        let qtd = parseInt(qtdSpan.innerText);
+        qtdSpan.innerText = Math.max(0, qtd - 1);
+        atualizarProduto(card);
+    };
+}
+
+/* ===== RECALCULA UM PRODUTO ===== */
+function atualizarProduto(card) {
+    const preco = parseFloat(card.dataset.preco) || 0;
+    const qtd = parseInt(card.querySelector(".qtd-valor").innerText) || 0;
+
+    card.querySelector(".total-produto").innerText =
+        formatar(preco * qtd);
+
+    calcularTotais();
+    salvarEstado();
+}
+
+window.addEventListener("load", () => {
+
+    document.querySelectorAll(".produto-card")
+        .forEach(ativarEventosProduto);
+
+    document.getElementById("gasto-previsto")
+        .addEventListener("input", () => {
+            calcularTotais();
+            salvarEstado();
+        });
+
+    restaurarEstado();   
+    calcularTotais();
+});
+
+</script>
+
+<script>
+function salvarEstado() {
+    const estado = {
+        gastoPrevisto: document.getElementById("gasto-previsto").value,
+        produtos: []
+    };
+
+    document.querySelectorAll(".produto-card").forEach(card => {
+        estado.produtos.push({
+            nome: card.querySelector(".nome").innerText,
+            preco: parseFloat(card.dataset.preco),
+            qtd: parseInt(card.querySelector(".qtd-valor").innerText)
+        });
+    });
+
+    localStorage.setItem("listaCompras", JSON.stringify(estado));
+}
+</script>
+
+<script>
+function restaurarEstado() {
+    const dados = localStorage.getItem("listaCompras");
+    if (!dados) return;
+
+    const estado = JSON.parse(dados);
+
+    document.getElementById("gasto-previsto").value =
+        estado.gastoPrevisto || 0;
+
+    document.querySelectorAll(".produto-card").forEach(card => {
+        const nome = card.querySelector(".nome").innerText;
+        const salvo = estado.produtos.find(p => p.nome === nome);
+
+        if (salvo) {
+            card.dataset.preco = salvo.preco;
+            card.querySelector(".qtd-valor").innerText = salvo.qtd;
+            card.querySelector(".preco-texto").innerText = formatar(salvo.preco);
+            card.querySelector(".total-produto").innerText =
+                formatar(salvo.preco * salvo.qtd);
+        }
+    });
+
+    calcularTotais();
+}
+</script>
+
+<script>
+function limparDados() {
+    if (!confirm("Deseja limpar todos os dados da compra atual?")) return;
+
+    localStorage.removeItem("listaCompras");
+
+    document.querySelectorAll(".qtd-valor")
+        .forEach(q => q.innerText = 0);
+
+    document.getElementById("gasto-previsto").value = 0;
+
+    calcularTotais();
+}
+</script>
+
+
+{% endblock %}

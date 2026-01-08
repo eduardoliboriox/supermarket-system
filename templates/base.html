@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Supermercado{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- HEADER MOBILE -->
+<header class="header-mobile">
+    <div class="header-mobile-left">
+        <div class="avatar-circle">
+            <img src="{{ url_for('static', filename='users/eduardo.jpeg') }}">
+        </div>
+        <span class="user-name">Compras</span>
+    </div>
+
+    <div class="header-mobile-right">
+        <button class="btn-search">🔍</button>
+    </div>
+</header>
+
+<main class="container-fluid mt-2">
+    {% block content %}{% endblock %}
+</main>
+
+<!-- BOTTOM NAVIGATION (Spotify Style) -->
+<nav class="bottom-nav">
+    <a href="/" class="bottom-item {% if page=='home' %}active{% endif %}">
+        <img src="{{ url_for('static', filename='icons/home.jpeg') }}" class="bottom-icon">
+        <small>Home</small>
+    </a>
+
+    <a href="/produtos" class="bottom-item {% if page=='produtos' %}active{% endif %}">
+        <img src="{{ url_for('static', filename='icons/ordens.jpeg') }}" class="bottom-icon">
+        <small>Produtos</small>
+    </a>
+
+    <a href="/carrinho" class="bottom-item {% if page=='carrinho' %}active{% endif %}">
+        <img src="{{ url_for('static', filename='icons/movimentar.jpeg') }}" class="bottom-icon">
+        <small>Carrinho</small>
+    </a>
+
+    <a href="/menu" class="bottom-item {% if page=='menu' %}active{% endif %}">
+        <img src="{{ url_for('static', filename='icons/menu-mais.png') }}" class="bottom-icon">
+        <small>Mais</small>
+    </a>
+</nav>
+
+</body>
+</html>

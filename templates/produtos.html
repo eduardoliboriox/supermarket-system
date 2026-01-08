@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Produtos{% endblock %}
+
+{% block content %}
+
+<div class="pagina-produtos">
+
+<h3 class="titulo-pagina">Produtos Cadastrados</h3>
+
+<div class="produtos-grid">
+    {% for p in produtos %}
+    <div class="produto-admin-card" data-id="{{ p.id }}">
+
+        <input class="produto-nome" value="{{ p.nome }}">
+
+        <input class="produto-preco" type="number" step="0.01" value="{{ p.preco }}">
+
+        <select class="produto-categoria">
+            <option {% if p.categoria=="Alimentos Principais" %}selected{% endif %}>
+                Alimentos Principais
+            </option>
+            <option {% if p.categoria=="Complementos" %}selected{% endif %}>
+                Complementos
+            </option>
+            <option {% if p.categoria=="Temperos" %}selected{% endif %}>
+                Temperos
+            </option>
+            <option {% if p.categoria=="Higiene e Limpeza" %}selected{% endif %}>
+                Higiene e Limpeza
+            </option>
+        </select>
+
+        <div class="acoes-produto">
+            <button class="btn-salvar" onclick="salvarProduto({{ p.id }})">
+                Salvar
+            </button>
+            <button class="btn-excluir" onclick="excluirProduto({{ p.id }})">
+                Excluir
+            </button>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+
+<script>
+function salvarProduto(id) {
+    const card = document.querySelector(`[data-id="${id}"]`);
+
+    fetch("/produto/atualizar", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            id: id,
+            nome: card.querySelector(".produto-nome").value,
+            preco: card.querySelector(".produto-preco").value,
+            categoria: card.querySelector(".produto-categoria").value
+        })
+    })
+    .then(r => r.json())
+    .then(() => {
+        card.style.outline = "2px solid #28a745";
+        setTimeout(() => card.style.outline = "none", 600);
+    });
+}
+</script>
+
+<script>
+function excluirProduto(id) {
+    if (!confirm("Deseja realmente excluir este produto?")) return;
+
+    fetch("/produto/excluir", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ id: id })
+    })
+    .then(r => r.json())
+    .then(() => {
+        document.querySelector(`[data-id="${id}"]`).remove();
+    });
+}
+</script>
+
+
+
+{% endblock %}
