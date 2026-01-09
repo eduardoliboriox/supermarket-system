@@ -49,6 +49,15 @@ def init_db():
         );
         """)
 
+# =========================
+# INIT DB SEMPRE (LOCAL E RAILWAY)
+# =========================
+try:
+    init_db()
+    print("Banco inicializado com sucesso")
+except Exception as e:
+    print("Erro ao inicializar banco:", e)
+
 
 # =========================
 # ROTAS
@@ -171,6 +180,5 @@ def update_preco(id):
 # START
 # =========================
 if __name__ == "__main__":
-    if not IS_POSTGRES:
-        init_db()
     app.run(host="0.0.0.0", port=8080)
+
