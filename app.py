@@ -277,5 +277,7 @@ def atualizar_produto():
 # START
 # =========================
 if __name__ == "__main__":
-    init_db()
+    if not IS_POSTGRES:
+        init_db()
     app.run(host="0.0.0.0", port=8080)
+
