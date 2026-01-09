@@ -38,40 +38,43 @@ def init_db():
     with get_db() as conn:
         if IS_POSTGRES:
             conn.execute("""
-            CREATE TABLE IF NOT EXISTS produtos (
-                id SERIAL PRIMARY KEY,
-                nome TEXT UNIQUE NOT NULL,
-                setor TEXT NOT NULL,
-                ultimo_preco NUMERIC DEFAULT 0
-            );
+                CREATE TABLE IF NOT EXISTS produtos (
+                    id SERIAL PRIMARY KEY,
+                    nome TEXT UNIQUE NOT NULL,
+                    setor TEXT NOT NULL,
+                    ultimo_preco NUMERIC DEFAULT 0
+                )
+            """)
 
-            CREATE TABLE IF NOT EXISTS compras (
-                id SERIAL PRIMARY KEY,
-                produto_id INTEGER REFERENCES produtos(id) ON DELETE CASCADE,
-                quantidade NUMERIC DEFAULT 1,
-                preco NUMERIC DEFAULT 0,
-                comprado BOOLEAN DEFAULT FALSE,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS compras (
+                    id SERIAL PRIMARY KEY,
+                    produto_id INTEGER REFERENCES produtos(id) ON DELETE CASCADE,
+                    quantidade NUMERIC DEFAULT 1,
+                    preco NUMERIC DEFAULT 0,
+                    comprado BOOLEAN DEFAULT FALSE,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
             """)
         else:
             conn.executescript("""
-            CREATE TABLE IF NOT EXISTS produtos (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nome TEXT UNIQUE NOT NULL,
-                setor TEXT NOT NULL,
-                ultimo_preco REAL DEFAULT 0
-            );
+                CREATE TABLE IF NOT EXISTS produtos (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    nome TEXT UNIQUE NOT NULL,
+                    setor TEXT NOT NULL,
+                    ultimo_preco REAL DEFAULT 0
+                );
 
-            CREATE TABLE IF NOT EXISTS compras (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                produto_id INTEGER,
-                quantidade REAL DEFAULT 1,
-                preco REAL DEFAULT 0,
-                comprado INTEGER DEFAULT 0,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-            );
+                CREATE TABLE IF NOT EXISTS compras (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    produto_id INTEGER,
+                    quantidade REAL DEFAULT 1,
+                    preco REAL DEFAULT 0,
+                    comprado INTEGER DEFAULT 0,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                );
             """)
+
 
 
 # =========================
